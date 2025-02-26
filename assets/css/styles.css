@@ -1,0 +1,507 @@
+/* ============================== */
+/* 共通スタイル */
+/* ============================== */
+
+body {
+	background-color: #f5f5f5;
+	font-family: Arial, sans-serif;
+	margin: 0;
+	padding: 0;
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+}
+
+/* ============================== */
+/* ロゴのスタイル */
+/* ============================== */
+
+/* 初期状態：中央配置 */
+.logo {
+	position: absolute;
+	top: 30%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	transition: all 0.5s ease-in-out;
+	max-width: 200px;
+}
+
+/* 会話開始後：左上固定 */
+.logo.small {
+	position: fixed;
+	top: 10px;
+	left: 10px;
+	transform: none;
+	max-width: 60px;
+}
+
+/* 背景ロゴ */
+.background-logo {
+	position: fixed;
+	bottom: 10px;
+	right: 10px;
+	width: 500px;
+	opacity: 0.1;
+	filter: grayscale(100%);
+	pointer-events: none;
+	z-index: -1;
+}
+
+/* ============================== */
+/* チャットコンテナ */
+/* ============================== */
+
+.chat-container {
+	position: relative;
+	max-width: 900px;
+	margin: 0 auto;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+}
+
+/* チャット履歴 */
+.chat-history {
+	flex-grow: 1;
+	overflow-y: auto;
+	padding: 10px;
+	width: 800px;
+	max-width: 900px;
+	padding-bottom: 100px;
+	height: calc(100vh - 120px); /* 高さを調整 */
+}
+
+/* ============================== */
+/* メッセージスタイル */
+/* ============================== */
+
+.user-message,
+.bot-message {
+	position: relative;
+	margin: 10px 0;
+	padding: 10px 15px;
+	border-radius: 10px;
+	max-width: 70%;
+	display: block;
+}
+
+/* ユーザーのメッセージ */
+.user-message {
+	background-color: #0078d4;
+	color: white;
+	margin-right: auto;
+	text-align: left;
+}
+
+.user-message::after {
+	content: '';
+	position: absolute;
+	bottom: -8px;
+	left: 10px;
+	border-width: 8px 8px 0 0;
+	border-style: solid;
+	border-color: #0078d4 transparent;
+}
+
+/* ボットのメッセージ */
+.bot-message {
+	background-color: #e0e0e0;
+	color: #333;
+	margin-left: auto;
+	margin-right: 0;
+	text-align: left;
+	margin-top: 20px;
+}
+
+.bot-message::before {
+	content: '';
+	position: absolute;
+	bottom: -8px;
+	right: 10px;
+	border-width: 8px 0 0 8px;
+	border-style: solid;
+	border-color: #e0e0e0 transparent;
+}
+
+/* ============================== */
+/* 入力エリア */
+/* ============================== */
+
+.input-area {
+	padding: 20px;
+	background-color: #fff;
+	transition: all 0.5s ease;
+}
+
+/* 初期状態：中央配置 */
+.input-area.initial {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 90%;
+	max-width: 900px;
+	border-radius: 8px;
+	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* 会話開始後：下部固定 */
+.input-area.bottom {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	width: 900px;
+	margin: 0 auto;
+	background-color: #fafafa;
+	box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+	border-top: 2px solid #0078d4;
+	border-radius: 8px 8px 0 0;
+}
+
+/* 入力フィールド */
+#userInput {
+	width: 100%;
+	padding: 15px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	font-size: 1rem;
+	box-sizing: border-box;
+	transition: border-color 0.2s ease;
+}
+
+#userInput:focus {
+	border-color: #0078d4;
+	outline: none;
+}
+
+/* ============================== */
+/* ボタンスタイル */
+/* ============================== */
+
+button {
+	padding: 10px 20px;
+	background-color: #333;
+	color: white;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+.filter-btn {
+	padding: 8px 12px;
+	margin: 5px;
+	border: 1px solid #0078d4;
+	background: white;
+	color: #0078d4;
+	cursor: pointer;
+	border-radius: 5px;
+}
+
+.filter-btn:hover {
+	background: #0078d4;
+	color: white;
+}
+
+/* ============================== */
+/* サイドバー */
+/* ============================== */
+
+.sidebar {
+	position: fixed;
+	left: -250px;
+	top: 0;
+	width: 250px;
+	height: 100%;
+	background: #333;
+	color: white;
+	padding: 15px;
+	transition: left 0.3s ease-in-out;
+	box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+	overflow-y: auto;
+	z-index: 1000;
+}
+
+.sidebar.open {
+	left: 0;
+}
+
+.sidebar h3 {
+	margin-bottom: 15px;
+}
+
+.sidebar ul {
+	list-style: none;
+	padding: 0;
+}
+
+.sidebar ul li {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 10px;
+	background: #444;
+	margin-bottom: 5px;
+	border-radius: 5px;
+}
+
+.sidebar ul li a {
+	color: white;
+	text-decoration: none;
+	flex-grow: 1;
+}
+
+/* ============================== */
+/* ユーザー情報 */
+/* ============================== */
+
+.user-info {
+	padding: 50px 10px;
+	background: #222;
+	text-align: center;
+	border-radius: 5px;
+	margin-top: 45px;
+	margin-bottom: 15px;
+	font-size: 14px;
+}
+
+.user-info .login-btn {
+	display: block;
+	margin-top: 10px;
+	background: #4caf50;
+	color: white;
+	text-align: center;
+	padding: 8px 12px;
+	border-radius: 5px;
+	text-decoration: none;
+	font-size: 14px;
+	font-weight: bold;
+	transition: background 0.3s ease-in-out;
+}
+
+/* ログアウトボタンのスタイル */
+.logout-btn {
+	display: block;
+	margin-top: 10px;
+	background: #d9534f; /* Bootstrap の danger 色 */
+	color: white;
+	text-align: center;
+	padding: 8px 12px;
+	border-radius: 5px;
+	text-decoration: none;
+	font-size: 14px;
+	font-weight: bold;
+	transition: background 0.3s ease-in-out;
+}
+
+.logout-btn:hover {
+	background: #c9302c; /* クリック時に少し濃い色 */
+}
+
+.register-btn {
+	display: block;
+	margin-top: 10px;
+	background: #0078d4;
+	color: white;
+	text-align: center;
+	padding: 8px 12px;
+	border-radius: 5px;
+	text-decoration: none;
+	font-size: 14px;
+	font-weight: bold;
+	transition: background 0.3s ease-in-out;
+}
+.register-btn:hover {
+	background: #005a9e;
+}
+.guest-message p {
+	margin: 0;
+	font-size: small;
+}
+/* サイドバー開閉ボタン */
+.toggle-btn {
+	position: fixed;
+	left: 10px;
+	top: 10px;
+	background: #0078d4;
+	color: white;
+	border: none;
+	padding: 10px;
+	cursor: pointer;
+	border-radius: 5px;
+	z-index: 1001;
+}
+
+/* 現在開いている会話を強調 */
+.conversation-item.active {
+	background-color: #0078d4; /* 青色のハイライト */
+	color: white;
+	font-weight: bold;
+	border-left: 5px solid #004c8c; /* 目立つ強調 */
+}
+
+.conversation-item.active .conversation-title-text {
+	color: white;
+}
+
+.conversation-item:hover {
+	background-color: #005a9e; /* ホバー時の色 */
+}
+
+/* ============================== */
+/* 会話リスト */
+/* ============================== */
+
+.conversation-item {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 8px 12px;
+	position: relative;
+	width: 100%;
+}
+
+.conversation-title-text {
+	cursor: pointer;
+	flex-grow: 1;
+	font-size: 16px;
+}
+/* 会話タイトルの編集用入力フィールド */
+.conversation-title-input {
+	width: 90%;
+	padding: 8px 12px;
+	font-size: 16px;
+	border: 2px solid #0078d4; /* アクティブカラー */
+	border-radius: 5px;
+	outline: none;
+	transition: all 0.3s ease-in-out;
+	background: #f9f9f9;
+	color: #333;
+	font-weight: bold;
+}
+
+/* フォーカス時のエフェクト */
+.conversation-title-input:focus {
+	background: #ffffff;
+	border-color: #005a9e;
+	box-shadow: 0 0 8px rgba(0, 120, 212, 0.4);
+}
+
+/* 文字を少し大きく見せる */
+.conversation-title-input::placeholder {
+	color: #aaa;
+	font-style: italic;
+}
+/* 3点リーダーメニュー */
+.menu-container {
+	position: relative;
+	display: inline-block;
+	color: #fff;
+}
+
+.menu-btn {
+	background: none;
+	border: none;
+	font-size: 20px;
+	cursor: pointer;
+	padding: 5px;
+}
+
+.menu-content {
+	display: none;
+	position: absolute;
+	right: 0;
+	background: white;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+	z-index: 10;
+	min-width: 120px;
+}
+
+.menu-content button {
+	display: block;
+	width: 100%;
+	padding: 8px;
+	background: none;
+	border: none;
+	text-align: left;
+	cursor: pointer;
+	color: #000;
+}
+
+.menu-container:hover .menu-content {
+	display: block;
+}
+
+/* モーダル背景 */
+.modal {
+	display: none; /* 初期状態では非表示 */
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.5);
+	justify-content: center;
+	align-items: center;
+	z-index: 1000;
+}
+
+/* モーダルコンテンツ */
+.modal-content {
+	background: white;
+	padding: 20px;
+	border-radius: 10px;
+	text-align: center;
+	width: 300px;
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* 削除・キャンセルボタン */
+#confirmDeleteBtn {
+	background: red;
+	color: white;
+	border: none;
+	padding: 10px;
+	margin: 10px;
+	cursor: pointer;
+	border-radius: 5px;
+	width: -webkit-fill-available;
+}
+
+#cancelDeleteBtn {
+	background: gray;
+	color: white;
+	border: none;
+	padding: 10px;
+	margin: 10px;
+	cursor: pointer;
+	border-radius: 5px;
+	width: -webkit-fill-available;
+}
+
+/* ホバー効果 */
+#confirmDeleteBtn:hover {
+	background: darkred;
+}
+
+#cancelDeleteBtn:hover {
+	background: darkgray;
+}
+
+/* ============================== */
+/* メディアクエリ */
+/* ============================== */
+
+@media (max-width: 900px) {
+	.background-logo {
+		width: 150px;
+	}
+	.chat-container,
+	.chat-history,
+	.input-area.bottom {
+		max-width: 100%;
+		width: 100%;
+	}
+}
